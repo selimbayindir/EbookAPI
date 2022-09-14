@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ebook.Persistence.Repositories
 {
-    public class WriteRepository<T> : IProductWriteRepository<T> where T : BaseEntity
+    public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
         readonly private EbookContext _context;
 
