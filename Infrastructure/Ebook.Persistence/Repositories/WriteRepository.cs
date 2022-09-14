@@ -13,7 +13,7 @@ namespace Ebook.Persistence.Repositories
 {
     public class WriteRepository<T> : IProductWriteRepository<T> where T : BaseEntity
     {
-        private readonly EbookContext _context;
+        readonly private EbookContext _context;
 
         public WriteRepository(EbookContext context)
         {

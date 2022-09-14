@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ebook.Application.Repositories
 {
-    public interface IProductWriteRepository<T> : IRepository<T> where T : class
+    public interface IWriteRepository<T> : IRepository<T> where T : class
     {
         Task<bool> AddAsync(T model);
         Task<bool> AddRangeAsync(List<T> model);

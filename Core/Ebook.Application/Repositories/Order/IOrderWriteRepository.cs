@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ebook.Application.Repositories
 {
-    public interface IOrderWriteRepository:IProductWriteRepository<Order>
+    public interface IOrderWriteRepository:IWriteRepository<Order>
     {
     }
 }
