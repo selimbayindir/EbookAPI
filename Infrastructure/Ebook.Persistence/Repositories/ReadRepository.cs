@@ -26,7 +26,8 @@ namespace Ebook.Persistence.Repositories
 
         public IQueryable<T> GetWhere(Expression<Func<T, bool>> method)
         {
-                return Table.Where(method);
+          return  await Table.FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+
         }
                     /// => Table.Where(method);
 
