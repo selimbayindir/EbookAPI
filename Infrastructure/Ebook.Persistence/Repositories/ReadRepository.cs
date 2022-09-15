@@ -2,6 +2,7 @@
 using Ebook.Domain.Entity.Common;
 using Ebook.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,25 +23,43 @@ namespace Ebook.Persistence.Repositories
 
         public DbSet<T> Table => _context.Set<T>();
 
-        public IQueryable<T> GetAll() => Table;
-
-        public IQueryable<T> GetWhere(Expression<Func<T, bool>> method)
+        public IQueryable<T> GetAll(bool tracking = true)
         {
-          return  await Table.FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
-
+            //=>Table();
+            var query = Table.AsQueryable();
+            if (!tracking)
+                query = query.AsNoTracking();
+            return query;
         }
-                    /// => Table.Where(method);
 
-
-        public async Task GetSingleAsync(Expression<Func<T, bool>> method)
+        public async Task<T> GetByIdAsync(string id, bool tracking = true)
         {
-            await Table.FirstOrDefaultAsync(method);
+            //return await Table.FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+            //=> await Table.FindAsync(Guid.Parse(id));
+
+            var query = Table.AsQueryable();
+            if (!tracking)
+                query = Table.AsNoTracking();
+
+            return await query.FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+                    }
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)
+        {
+            //=> await Table.FirstOrDefaultAsync(method);
+            var query = Table.AsQueryable();
+            if (!tracking)
+                query = Table.AsNoTracking();
+            return await query.FirstOrDefaultAsync(method);
         }
-                    /// =>await Table.FirstOrDefaultAsync(method);
-        
-        public async Task GetByIdAsync(string id)
+
+        /// =>await Table.FirstOrDefaultAsync(method);
+
+        public IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true)
         {
-            await Table.FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+            var query = Table.Where(method);
+            if (!tracking)
+                query = query.AsNoTracking();
+            return query;
         }
     }
 }

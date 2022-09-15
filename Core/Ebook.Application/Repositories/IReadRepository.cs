@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ebook.Domain.Entity.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Ebook.Application.Repositories
 {
-    public interface IReadRepository<T>  :IRepository<T> where T : class 
+    public interface IReadRepository<T>  :IRepository<T> where T : BaseEntity 
     {
-        IQueryable<T> GetAll();
-        IQueryable<T> GetWhere(Expression<Func<T, bool>> method);
-        Task GetSingleAsync(Expression<Func<T, bool>> method);
-        Task GetByIdAsync(string id);
+        IQueryable<T> GetAll(bool tracking=true);
+        IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true);
+        Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true);
+        Task<T> GetByIdAsync(string id, bool tracking = true);
     }
 }

@@ -38,3 +38,11 @@ IRead Ve IWrite olarak ayırman
 
 IQueryable :Sorgu Üzerinde çalışılacaksqa
 IEnumarable :InMemory de çalışır List de Ienumarable dir.
+
+
+2)Mimariyi Tasarlamak
+Aplication Katmanında İnterfaceleri tanımladık 
+
+
+---
+interceptor : trafik polisi farzedebilirsin 

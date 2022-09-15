@@ -29,9 +29,9 @@ namespace Ebook.Persistence.Repositories
           EntityEntry<T> entityEntry= await Table.AddAsync(model);
             return entityEntry.State==EntityState.Added; //true false
         }
-        public async Task<bool> AddRangeAsync(List<T> model)
+        public async Task<bool> AddRangeAsync(List<T> models)
         {
-            await Table.AddRangeAsync(model);
+            await Table.AddRangeAsync(models);
             return true;
         }
 
